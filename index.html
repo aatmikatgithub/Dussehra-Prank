@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Dussehra! ✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff9933, #ffffff, #138808);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            border: 3px solid #ff9933;
+            position: relative;
+        }
+
+        h1 {
+            color: #d35400;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        p {
+            color: #333;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            height: 70px;
+            align-items: center;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        #yesBtn {
+            background-color: #27ae60;
+            color: white;
+            transition: transform 0.1s ease;
+            z-index: 5;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+            background-color: #219653;
+        }
+
+        #noBtn {
+            background-color: #c0392b;
+            color: white;
+            position: absolute;
+            transition: all 0.15s ease-out;
+            z-index: 10;
+            white-space: nowrap;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .qr-container img {
+            max-width: 220px;
+            width: 100%;
+            border: 5px solid #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .upi-id {
+            background: #f1f2f6;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-weight: bold;
+            color: #2c3e50;
+            display: inline-block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="trapScreen" class="card">
+        <h1>🏹 Happy Dussehra! ✨</h1>
+        <p>Asura Ravana has been defeated! 🌟 But wait... rules are rules. You cannot claim your festive sweets without sending the mandatory <strong>Shubh Shagun</strong> (festive money). <br><br>Are you sending the Shagun right now?</p>
+        
+        <div class="btn-container" id="container">
+            <button id="yesBtn" onclick="showQR()">Yes, absolutely! ❤️</button>
+            <button id="noBtn">No, I am broke 😢</button>
+        </div>
+    </div>
+
+    <div id="qrScreen" class="card hidden">
+        <h1>🎉 Smart Choice! 🎉</h1>
+        <p>Victory of good over evil! Traditions have been successfully saved. Scan the QR code below to transfer the Shagun.</p>
+        
+        <div class="qr-container">
+            <img src="qr-code.png" alt="UPI QR Code">
+        </div>
+        
+        <div>
+            <span class="upi-id">yourname@upi</span>
+        </div>
+        <p style="margin-top: 20px; font-size: 0.9rem; color: #7f8c8d;">May your pockets always be full! Happy Dussehra! 🏹✨</p>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const trapScreen = document.getElementById('trapScreen');
+        const qrScreen = document.getElementById('qrScreen');
+        const container = document.getElementById('container');
+
+        noBtn.addEventListener('mouseover', () => {
+            moveButton();
+        });
+
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault(); 
+            moveButton();
+        });
+
+        function moveButton() {
+            const containerRect = container.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+
+            const maxX = containerRect.width - btnRect.width;
+            const maxY = 150; // Dynamic height shift range
+
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY) - 50; 
+
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        function showQR() {
+            trapScreen.classList.add('hidden');
+            qrScreen.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
